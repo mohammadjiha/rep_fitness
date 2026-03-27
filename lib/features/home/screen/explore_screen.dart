@@ -25,24 +25,13 @@ class ExploreScreen extends StatelessWidget {
            child: SafeArea(child: Padding(padding:EdgeInsets.symmetric(horizontal: 5.w),
            child: Column(
            children: [
-             Row(
-               children: [
-                 IconButton(
-                   onPressed: () => Navigator.pop(context),
-                   icon: const Icon(Icons.arrow_back, color: Colors.white),
-                 ),
-                 const Spacer(),
-                 Text(
-                   'Scan',
-                   style: GoogleFonts.poppins(
-                     fontSize: 20.sp,
-                     color: Colors.white,
-                     fontWeight: FontWeight.w600,
-                   ),
-                 ),
-                 const Spacer(),
-                 SizedBox(width: 48),
-               ],
+             Text(
+               'Explore',
+               style: GoogleFonts.poppins(
+                 fontSize: 20.sp,
+                 color: Colors.white,
+                 fontWeight: FontWeight.w600,
+               ),
              ),
              SizedBox(height: 2.h),
              Row(

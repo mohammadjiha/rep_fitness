@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitova/features/home/widget/settings_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../cache/chchehelper.dart';
+import '../../auth/sign_in/screen/signin_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -73,7 +77,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onSubscribeTap: () {},
               onSecurityTap: () {},
               onPrivacyTap: () {},
-              onLogoutTap: () {},
+              onLogoutTap: () async {
+                await FirebaseAuth.instance.signOut();
+                await CacheHelper.clear();
+
+                if (!context.mounted) return;
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  SignInScreen.routName,
+                      (route) => false,
+                );
+                }
+
             ),
           ],
         ),

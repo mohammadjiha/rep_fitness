@@ -4,19 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../service/firebase/model/exercise_model.dart' show Exercise;
+import '../../../../model/exercise.dart';
 import '../widget/program_card.dart';
 
 class WorkoutChest extends StatelessWidget {
   static const String routName = 'WorkoutChest';
-  WorkoutChest({super.key});
+  WorkoutChest({super.key, });
 
   final ExerciseRepo repo = ExerciseRepo();
 
   @override
   Widget build(BuildContext context) {
     final muscleId = ModalRoute.of(context)?.settings.arguments as String? ?? 'chest';
-
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -82,9 +81,12 @@ class WorkoutChest extends StatelessWidget {
                       separatorBuilder: (_, __) => SizedBox(height: 1.h),
                       itemBuilder: (context, index) {
                         final ex = list[index];
+                        debugPrint('=== ex.id: "${ex.id}" | ex.name: "${ex.name}"');
 
                         return GestureDetector(
                           onTap: () {
+                            print("Received muscleId: $muscleId");
+
                             Navigator.of(context).pushNamed(
                               WorkoutSessionScreen.routName,
                               arguments: {
@@ -122,7 +124,7 @@ class ExerciseRepo {
         .collection('muscle group')
         .doc(muscleId)
         .collection('exercises')
-        .orderBy('order') // إذا عندك order داخل التمارين
+        .orderBy('order')
         .snapshots()
         .map((snap) {
       final all = snap.docs.map((d) => Exercise.fromDoc(d.data(), d.id)).toList();

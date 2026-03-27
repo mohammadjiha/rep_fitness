@@ -145,13 +145,6 @@ class _ScanScreenState extends State<ScanScreen> {
           child: Column(
             children: [
               SizedBox(height: 1.h),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  ),
-                  const Spacer(),
                   Text(
                     'Scan',
                     style: GoogleFonts.poppins(
@@ -160,11 +153,6 @@ class _ScanScreenState extends State<ScanScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const Spacer(),
-                  SizedBox(width: 48),
-                ],
-              ),
-
               SizedBox(height: 2.h),
 
               // ====== PREVIEW CARD ======

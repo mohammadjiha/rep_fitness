@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../service/firebase/model/muscle_group_model.dart' show MuscleGroup;
+import '../../../model/muscle_group.dart';
 import '../widget/workout_card.dart';
-
 
 class WorkOut extends StatefulWidget {
   static const String routName = 'WorkOut';
@@ -168,6 +167,7 @@ class _WorkOutState extends State<WorkOut> {
 
                         return GestureDetector(
                           onTap: () {
+                            print("Clicked muscle: ${g.id}");
                             Navigator.of(context).pushNamed(
                               WorkoutChest.routName,
                               arguments: g.id,
