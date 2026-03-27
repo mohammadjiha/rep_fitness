@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "456741749118",
+    "project_id": "fitnes-66b28",
+    "storage_bucket": "fitnes-66b28.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456741749118:android:8da6b98d6d2799187eb32f",
+        "android_client_info": {
+          "package_name": "com.fitova.fitness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBtgJVUCk2S_mssABdRQSbSQiLfYORVy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
