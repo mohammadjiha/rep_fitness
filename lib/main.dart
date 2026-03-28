@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitova/cache/chchehelper.dart';
 import 'package:fitova/core/controller/set_goal_muscle_controller/bloc/container_set_goal_muscle_bloc.dart';
+import 'package:fitova/features/exercisses/chooes_muscle/screen/choose_muscle.dart';
 import 'package:fitova/features/exercisses/set_goal_muscle/screen/set_goal_muscle_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
             // FoodScanScreen.routName: (context) => FoodScanScreen(),
             FoodSearchScreen.routName: (_) => const FoodSearchScreen(),
             SetGoalMuscleScreen.routName: (context) => SetGoalMuscleScreen(),
+            ChooseMuscleScreen.routName:(context)=>ChooseMuscleScreen()
           },
         );
       },

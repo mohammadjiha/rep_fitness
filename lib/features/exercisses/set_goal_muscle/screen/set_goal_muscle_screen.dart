@@ -1,4 +1,5 @@
 import 'package:fitova/core/constants/color.dart';
+import 'package:fitova/features/exercisses/chooes_muscle/screen/choose_muscle.dart';
 import 'package:fitova/features/exercisses/set_goal_muscle/widget/container_set_your_goal_muscle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -111,16 +112,21 @@ class SetGoalMuscleScreen extends StatelessWidget {
                       onTap: () {
                         context.read<ContainerSetGoalMuscleBloc>().onGoalTapped(index);
                       },
-                      child: ContainerSetYourGoalMuscle(
-                        title: goals[index]['title'] as String,
-                        subTitle: goals[index]['subTitle'] as String,
-                        iconContainer:
-                            goals[index]['iconContainer'] as IconData,
-                        isSelected: selectedIndex == index,
+                      child: Column(
+                        children: [
+                          ContainerSetYourGoalMuscle(
+                            title: goals[index]['title'] as String,
+                            subTitle: goals[index]['subTitle'] as String,
+                            iconContainer:
+                                goals[index]['icon'] as IconData,
+                            isSelected: selectedIndex == index,
+                          ),
+                          SizedBox(height: 2.h),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 1.h),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -167,20 +173,25 @@ class SetGoalMuscleScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 1.h),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 8.h,
-                    width: 100.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.kPrimaryGreen,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Text(
-                      'Continue',
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 17.sp,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).pushNamed(ChooseMuscleScreen.routName);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        color: AppColors.kPrimaryGreen,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Text(
+                        'Continue',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 17.sp,
+                        ),
                       ),
                     ),
                   ),
