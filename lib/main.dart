@@ -12,6 +12,7 @@ import 'package:sizer/sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/constants/app_transitions.dart';
+import 'core/controller/choose_muscle_controller/choose_muscle_bloc.dart';
 import 'features/auth/enter_gym_id/screen/enter_gym_id.dart';
 import 'features/auth/reset_password/screen/check_email.dart';
 import 'features/auth/reset_password/screen/create_new_password.dart';
@@ -39,8 +40,11 @@ Future<void> main() async {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
-      builder: (context) => BlocProvider(
-        create: (context) => ContainerSetGoalMuscleBloc(),
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => ContainerSetGoalMuscleBloc()),
+          BlocProvider(create: (_) => ChooseMuscleBloc()),
+        ],
         child: MyApp(),
       ),
     ),

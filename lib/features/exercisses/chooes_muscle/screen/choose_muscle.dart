@@ -1,22 +1,15 @@
+import 'package:fitova/core/controller/choose_muscle_controller/choose_muscle_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
-  runApp(const ChooseMuscleScreen());
-}
-
 class ChooseMuscleScreen extends StatelessWidget {
-  static const String routName="ChooseMuscleScreen";
+  static const String routName = "ChooseMuscleScreen";
   const ChooseMuscleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Kinetic',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const MuscleSelectionScreen(),
-    );
+    return const MuscleSelectionScreen();
   }
 }
 
@@ -32,18 +25,10 @@ class MuscleOption {
   });
 }
 
-class MuscleSelectionScreen extends StatefulWidget {
+class MuscleSelectionScreen extends StatelessWidget {
   const MuscleSelectionScreen({super.key});
 
-  @override
-  State<MuscleSelectionScreen> createState() => _MuscleSelectionScreenState();
-}
-
-class _MuscleSelectionScreenState extends State<MuscleSelectionScreen> {
-  int _selectedIndex = 0;
-  int _navIndex = 0;
-
-  final List<MuscleOption> muscles = const [
+  static const List<MuscleOption> muscles = [
     MuscleOption(name: 'CHEST', category: 'PUSH', icon: Icons.fitness_center),
     MuscleOption(name: 'BACK', category: 'PULL', icon: Icons.accessibility_new),
     MuscleOption(name: 'SHOULDERS', category: 'PUSH', icon: Icons.sports_gymnastics),
@@ -62,40 +47,44 @@ class _MuscleSelectionScreenState extends State<MuscleSelectionScreen> {
     return Scaffold(
       backgroundColor: _bg,
       body: SafeArea(
-        child: Column(
-          children: [
-            _buildTopBar(),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildHeader(),
-                    const SizedBox(height: 24),
-                    Expanded(child: _buildGrid()),
-                    const SizedBox(height: 16),
-                    _buildContinueButton(),
-                    const SizedBox(height: 12),
-                  ],
+        child: BlocBuilder<ChooseMuscleBloc, int>(
+          builder: (context, selectedIndex) {
+            return Column(
+              children: [
+                _buildTopBar(context),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 20),
+                        _buildHeader(),
+                        const SizedBox(height: 24),
+                        Expanded(child: _buildGrid(context, selectedIndex)),
+                        const SizedBox(height: 16),
+                        _buildContinueButton(),
+                        const SizedBox(height: 12),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _buildTopBar() {
+  Widget _buildTopBar(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 5.w),
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: (){ Navigator.of(context).pushNamed(ChooseMuscleScreen.routName);},
+            onTap: () => Navigator.of(context).pop(),
             child: const CircleAvatar(
               radius: 20,
               backgroundColor: Color(0xFF2A2D30),
@@ -166,17 +155,13 @@ class _MuscleSelectionScreenState extends State<MuscleSelectionScreen> {
         const Text(
           'Select your primary target for optimized\nenergy distribution.',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: _textDim,
-            fontSize: 13,
-            height: 1.5,
-          ),
+          style: TextStyle(color: _textDim, fontSize: 13, height: 1.5),
         ),
       ],
     );
   }
 
-  Widget _buildGrid() {
+  Widget _buildGrid(BuildContext context, int selectedIndex) {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: muscles.length,
@@ -187,9 +172,9 @@ class _MuscleSelectionScreenState extends State<MuscleSelectionScreen> {
         childAspectRatio: 1.2,
       ),
       itemBuilder: (context, index) {
-        final isSelected = _selectedIndex == index;
+        final isSelected = selectedIndex == index;
         return GestureDetector(
-          onTap: () => setState(() => _selectedIndex = index),
+          onTap: () => context.read<ChooseMuscleBloc>().onChooseMuscleTapped(index),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
@@ -253,6 +238,7 @@ class _MuscleSelectionScreenState extends State<MuscleSelectionScreen> {
       },
     );
   }
+
   Widget _buildContinueButton() {
     return SizedBox(
       width: double.infinity,
@@ -285,5 +271,4 @@ class _MuscleSelectionScreenState extends State<MuscleSelectionScreen> {
       ),
     );
   }
-
 }
