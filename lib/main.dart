@@ -3,6 +3,7 @@ import 'package:fitova/cache/chchehelper.dart';
 import 'package:fitova/core/controller/set_goal_muscle_controller/bloc/container_set_goal_muscle_bloc.dart';
 import 'package:fitova/features/exercisses/chooes_muscle/screen/choose_muscle.dart';
 import 'package:fitova/features/exercisses/set_goal_muscle/screen/set_goal_muscle_screen.dart';
+import 'package:fitova/features/exercisses/setup_your_workout/screen/setup_your_workout.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
@@ -83,7 +84,8 @@ class MyApp extends StatelessWidget {
             // FoodScanScreen.routName: (context) => FoodScanScreen(),
             FoodSearchScreen.routName: (_) => const FoodSearchScreen(),
             SetGoalMuscleScreen.routName: (context) => SetGoalMuscleScreen(),
-            ChooseMuscleScreen.routName:(context)=>ChooseMuscleScreen()
+            ChooseMuscleScreen.routName:(context)=>ChooseMuscleScreen(),
+            SetupYourWorkout.routName:(context)=>SetupYourWorkout()
           },
         );
       },

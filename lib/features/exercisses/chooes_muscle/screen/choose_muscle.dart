@@ -1,4 +1,5 @@
 import 'package:fitova/core/controller/choose_muscle_controller/choose_muscle_bloc.dart';
+import 'package:fitova/features/exercisses/setup_your_workout/screen/setup_your_workout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -63,7 +64,7 @@ class MuscleSelectionScreen extends StatelessWidget {
                         const SizedBox(height: 24),
                         Expanded(child: _buildGrid(context, selectedIndex)),
                         const SizedBox(height: 16),
-                        _buildContinueButton(),
+                        _buildContinueButton(context),
                         const SizedBox(height: 12),
                       ],
                     ),
@@ -174,7 +175,9 @@ class MuscleSelectionScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         final isSelected = selectedIndex == index;
         return GestureDetector(
-          onTap: () => context.read<ChooseMuscleBloc>().onChooseMuscleTapped(index),
+          onTap: (){
+            return context.read<ChooseMuscleBloc>().onChooseMuscleTapped(index);
+          },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
@@ -239,12 +242,14 @@ class MuscleSelectionScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContinueButton() {
+  Widget _buildContinueButton(context) {
     return SizedBox(
       width: double.infinity,
       height: 54,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(SetupYourWorkout.routName);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: _green,
           foregroundColor: Colors.black,
